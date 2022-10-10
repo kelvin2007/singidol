@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Singidol - Detail Tiket</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(page = ${'tiket'})"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <div class="d-flex justify-content-between">
+          <h2 th:text="'Detail Tiket ' + ${tiket.noTiket}"></h2>
+        </div>
+
+        <br>
+        <table>
+          <tr>
+            <td><p>Nama Konser</p></td>
+            <td><p th:text="'&emsp;: ' + ${tiket.konser.namaKonser}"></p></td>
+          </tr>
+          <tr>
+            <td><p>Waktu</p></td>
+            <td><p th:text="'&emsp;: ' + ${#temporals.format(tiket.konser.waktuKonser, 'dd MMMM yyyy, hh.mm a')}"></p></td>
+          </tr>
+          <tr>
+            <td><p>Tempat</p></td>
+            <td><p th:text="'&emsp;: ' + ${tiket.konser.tempatKonser}"></p></td>
+          </tr>
+          <tr>
+            <td><p>Atas nama</p></td>
+            <td><p th:text="'&emsp;: ' + ${tiket.namaLengkap}"></p></td>
+          </tr>
+          <tr>
+            <td><p>Email</p></td>
+            <td><p th:text="'&emsp;: ' + ${tiket.email}"></p></td>
+          </tr>
+          <tr>
+            <td><p>Tanggal Pembelian</p></td>
+            <td><p th:text="'&emsp;: ' + ${#temporals.format(tiket.tanggalPembelian, 'dd MMMM yyyy')}"></p></td>
+          </tr>
+          <tr>
+            <td><p>Tipe</p></td>
+            <td><p th:text="'&emsp;: ' + ${tiket.tipe.namaTipe}"></p></td>
+          </tr>
+        </table>
+
+        <br>
+        <a class="btn btn-primary" href="/">Kembali</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Singidol - Add Tiket</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(page = ${'tiket'})"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Tiket</h2>
+                <br>
+                <form th:action="@{/tiket/pesan}" th:object="${tiket}" method="POST">
+                    <input type="hidden" th:field="*{noTiket}" />
+                    <input type="hidden" th:field="*{tanggalPembelian}" />
+
+                    Konser: <br>
+                    <select required th:field="*{konser}"
+                            class="form-control">
+                        <div th:each="konserEx, iterationStatus1 : ${listKonserExisting}">
+                            <option th:value="${konserEx.idKonser}" th:text="${konserEx.namaKonser}"></option>
+                        </div>
+                    </select>
+                    <br><br>
+
+                    Nama Pemesan: <br>
+                    <input required class="form-control" type="text" th:field="*{namaLengkap}"/>
+                    <br><br>
+
+                    Tanggal Lahir: <br>
+                    <input required class="form-control" type="date" th:field="*{tanggalLahir}" />
+                    <br><br>
+
+                    Email: <br>
+                    <input required class="form-control" type="text" th:field="*{email}"/>
+                    <br><br>
+
+                    Konser: <br>
+                    <select required th:field="*{tipe}"
+                            class="form-control">
+                        <div th:each="tipeEx, iterationStatus1 : ${listTipeExisting}">
+                            <option th:value="${tipeEx.idTipe}" th:text="${#strings.toUpperCase(tipeEx.namaTipe)}"></option>
+                        </div>
+                    </select>
+                    <br><br>
+
+                    <button class="btn btn-primary" type="submit" name="save">Pesan</button>
+                    <a class="btn btn-danger" href="/">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

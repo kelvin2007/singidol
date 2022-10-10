@@ -1,0 +1,21 @@
+.center-container{
+    height: calc(100vh - 80px);
+    text-align: center;
+}
+
+.home-title{
+    padding: 60px 40px;
+    margin-bottom: 30px !important;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.home-sub{
+    font-weight: bold;
+}
+
+.features{
+    padding-top: 30px;
+}
+

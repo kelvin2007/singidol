@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Singidol - Detail Idol</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(page = ${'idol'})"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="d-flex justify-content-between">
+                    <h2>Detail Idol</h2>
+                </div>
+
+                <br>
+                <table>
+                    <tr>
+                        <td><p>Nama Idol</p></td>
+                        <td><p th:text="'&emsp;: ' + ${idol.namaIdol}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Asal Negara</p></td>
+                        <td><p th:text="'&emsp;: ' + ${idol.asalNegara}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Jumlah Anggota</p></td>
+                        <td><p th:text="'&emsp;: ' + ${idol.jumlahAnggota}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p>Tanggal Debut</p></td>
+                        <td><p th:text="'&emsp;: ' + ${#temporals.format(idol.tanggalDebut, 'dd MMMM yyyy')}"></p></td>
+                    </tr>
+                </table>
+
+                <br>
+                <a class="btn btn-primary" href="/">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

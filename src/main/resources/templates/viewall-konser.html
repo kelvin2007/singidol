@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Singidol - Konser</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar(page = ${'konser'})"></nav>
+<div class="container pt-4">
+    <h2>Daftar Konser</h2>
+    <br>
+    <a th:href="@{/konser/cari}" class="btn btn-primary">Filter</a>
+    <br><br>
+    <a th:href="@{/konser/tambah}" class="btn btn-primary">+ Tambah Konser</a>
+    <br>
+    <div th:if="*{listKonser.size() != 0}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="text-center">No</th>
+                <th class="text-center">Konser</th>
+                <th class="text-center">Pendapatan</th>
+                <th class="text-center">Detail Konser</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="konser, iterationStatus  : ${listKonser}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${konser.namaKonser}"></td>
+                <td th:text="'Rp ' + ${konser.totalPendapatan}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/konser/} + ${konser.idKonser}">Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div th:unless="*{listKonser.size() != 0}">
+        <h4 th:text="'Tidak Ada Konser'"></h4>
+    </div>
+    <br>
+</div>
+
+</body>
+
+</html>

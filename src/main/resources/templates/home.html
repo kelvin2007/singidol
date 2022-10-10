@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Singidol - Beranda</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="d-flex justify-content-center align-items-center center-container">
+    <div class="m-4 justify-content-center">
+        <div class="container home-title bg-primary">
+            <h2>WELCOME TO SINGIDOL</h2>
+        </div>
+        <h7 class="home-sub">List of Feature:</h7>
+        <div class="d-flex justify-content-center features">
+            <a th:href="@{/konser}" class="mx-2 btn btn-primary">Konser</a>
+            <a th:href="@{/tiket}" class="mx-2 btn btn-primary">Tiket</a>
+            <a th:href="@{/idol}" class="mx-2 btn btn-primary">Idol</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
