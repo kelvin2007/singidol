@@ -2,9 +2,10 @@ package apap.tugas.tugas1_singidol_2006596964.controller;
 
 import apap.tugas.tugas1_singidol_2006596964.model.IdolModel;
 import apap.tugas.tugas1_singidol_2006596964.model.KonserModel;
-import apap.tugas.tugas1_singidol_2006596964.model.PenampilanKonserModel;
+import apap.tugas.tugas1_singidol_2006596964.model.TipeModel;
 import apap.tugas.tugas1_singidol_2006596964.service.PenampilanKonserService;
 import apap.tugas.tugas1_singidol_2006596964.service.IdolService;
+import apap.tugas.tugas1_singidol_2006596964.service.TipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class PenampilanKonserController {
     @Autowired
     private PenampilanKonserService penampilanKonserService;
 
+    @Qualifier("idolServiceImpl")
     @Autowired
     private IdolService idolService;
 

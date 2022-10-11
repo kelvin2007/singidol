@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <title>Singidol - Top Konser</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar(page = ${'bonus'})"></nav>
+<div class="container pt-4">
+  <h2>Top Konser</h2>
+  <br>
+
+  <form th:action="@{/bonus/konser/top/}" method="GET">
+    Tipe: <br>
+    <select required name="idTipe" class="form-control">
+      <div th:each="tipeEx, iterationStatus1 : ${listTipeExisting}">
+        <option th:value="${tipeEx.idTipe}" th:text="${#strings.toUpperCase(tipeEx.namaTipe)}"></option>
+      </div>
+    </select>
+    <br>
+    <button class="btn btn-primary" type="submit">Cari</button>
+    <a class="btn btn-danger" href="/">Batal</a>
+  </form>
+
+  <br><hr/>
+  <div th:if="${countTiket != 0}">
+    <table class="detail-konser">
+      <tr>
+        <td><p>Nama Konser</p></td>
+        <td><p th:text="'&emsp;: ' + ${konser.namaKonser}"></p></td>
+      </tr>
+      <tr>
+        <td><p>Waktu</p></td>
+        <td><p th:text="'&emsp;: ' + ${#temporals.format(konser.waktuKonser, 'dd MMMM yyyy, hh.mm a')}"></p></td>
+      </tr>
+      <tr>
+        <td><p>Tempat</p></td>
+        <td><p th:text="'&emsp;: ' + ${konser.tempatKonser}"></p></td>
+      </tr>
+      <tr>
+        <td><p>Pendapatan</p></td>
+        <td><p th:text="'&emsp;: Rp ' + ${konser.totalPendapatan}"></p></td>
+      </tr>
+      <tr>
+        <td><p>Jumlah Pembelian Tiket</p></td>
+        <td><p th:text="'&emsp;: ' + ${countTiket} + ' ('+ ${#strings.toUpperCase(namaTipe)} +')'"></p></td>
+      </tr>
+    </table>
+    <br>
+    <div class="col p-0">
+      <h4>Daftar Idol Yang Tampil</h4>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Jam</th>
+          <th>Idol</th>
+          <th>Detail Idol</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="idolTampil, iterationStatus : ${konser.listPenampilanKonser}">
+          <td th:text="${#temporals.format(idolTampil.jamMulaiTampil, 'hh.mm a')}"></td>
+          <td th:text="${idolTampil.idol.namaIdol}"></td>
+          <td>
+            <a class="btn btn-sm btn-primary" th:href="@{/idol/} + ${idolTampil.idol.idIdol}">Detail</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+  </div>
+  <br>
+</div>
+
+</body>
+
+</html>

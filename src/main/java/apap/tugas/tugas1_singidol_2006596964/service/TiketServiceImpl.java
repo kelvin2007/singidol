@@ -69,7 +69,7 @@ public class TiketServiceImpl implements TiketService {
             String tigaNamaDepan = tiket.getNamaLengkap().trim().substring(0, 3);
             int abjadKonser = ((int) (
                     tiket.getKonser().getNamaKonser().trim()
-                            .split("\\s+")[0].trim().charAt(0))) - 64;
+                            .charAt(0))) - 64;
             String abjadKonserStr = String.format("%02d", abjadKonser);
 
             Random rd = new Random();

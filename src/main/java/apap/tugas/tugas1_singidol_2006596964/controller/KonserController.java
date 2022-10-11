@@ -3,9 +3,11 @@ package apap.tugas.tugas1_singidol_2006596964.controller;
 import apap.tugas.tugas1_singidol_2006596964.model.IdolModel;
 import apap.tugas.tugas1_singidol_2006596964.model.KonserModel;
 import apap.tugas.tugas1_singidol_2006596964.model.PenampilanKonserModel;
+import apap.tugas.tugas1_singidol_2006596964.model.TipeModel;
 import apap.tugas.tugas1_singidol_2006596964.service.KonserService;
 import apap.tugas.tugas1_singidol_2006596964.service.IdolService;
 import apap.tugas.tugas1_singidol_2006596964.service.PenampilanKonserService;
+import apap.tugas.tugas1_singidol_2006596964.service.TipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -28,6 +31,11 @@ public class KonserController {
     @Qualifier("penampilanKonserServiceImpl")
     @Autowired
     private PenampilanKonserService penampilanKonserService;
+
+    @Qualifier("tipeServiceImpl")
+    @Autowired
+    private TipeService tipeService;
+
 
     @GetMapping("/konser")
     public String viewAllKonser(Model model){
@@ -164,5 +172,33 @@ public class KonserController {
 
         model.addAttribute("namaKonser", konser.getNamaKonser());
         return "update-konser";
+    }
+
+    @GetMapping("/bonus")
+    public String bonusKonserPage(Model model){
+        List<TipeModel> listTipeExisting = tipeService.getListTipe();
+        model.addAttribute("listTipeExisting", listTipeExisting);
+        model.addAttribute("namaTipe", "");
+        model.addAttribute("countTiket", 0);
+        model.addAttribute("konser", null);
+        return "bonus";
+    }
+    @GetMapping("/bonus/konser/top/")
+    public String bonusKonserSubmit(
+            @RequestParam(value="idTipe") String idTipe,
+            Model model){
+
+        TipeModel idTipeNew = tipeService.getTipeByID(Long.parseLong(idTipe));
+
+        HashMap<KonserModel, Long> konserTop = konserService.getTopKonser(idTipeNew); //Cek konser
+        KonserModel konser = konserTop.keySet().iterator().next();
+        Long countTop = konserTop.get(konser);
+
+        List<TipeModel> listTipeExisting = tipeService.getListTipe();
+        model.addAttribute("listTipeExisting", listTipeExisting);
+        model.addAttribute("namaTipe", idTipeNew.getNamaTipe());
+        model.addAttribute("countTiket", countTop);
+        model.addAttribute("konser", konser);
+        return "bonus";
     }
 }
