@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.ConstraintViolationException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,11 +95,14 @@ public class KonserController {
         for (PenampilanKonserModel penampilan: konser.getListPenampilanKonser()){
             penampilan.setKonser(konser);
         }
+        try {
+            konserService.addKonser(konser);
 
-        konserService.addKonser(konser);
-
-        model.addAttribute("namaKonser", konser.getNamaKonser());
-        return "add-konser";
+            model.addAttribute("namaKonser", konser.getNamaKonser());
+            return "add-konser";
+        } catch(ConstraintViolationException e){
+            return "error/error-konser";
+        }
     }
 
     @GetMapping("/konser/{id}")

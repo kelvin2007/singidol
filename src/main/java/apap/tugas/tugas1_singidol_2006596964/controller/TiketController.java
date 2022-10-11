@@ -46,7 +46,7 @@ public class TiketController {
         return "view-tiket";
     }
 
-    @GetMapping("/tiket/hapus/{id}")
+    @PostMapping("/tiket/hapus/{id}")
     public String deleteTiket(@PathVariable(value="id") String id, Model model){
         TiketModel tiket = tiketService.getTiketByID(Long.parseLong(id));
         if (tiket == null){

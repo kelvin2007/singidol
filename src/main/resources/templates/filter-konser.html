@@ -45,11 +45,11 @@
       </thead>
       <tbody>
       <tr th:each="konser, iterationStatus  : ${listKonser}">
-        <td th:text="${iterationStatus.count}"></td>
-        <td th:text="${konser.namaKonser}"></td>
-        <td th:text="'Rp ' + ${konser.totalPendapatan}"></td>
-        <td>
-          <a class="btn btn-primary" th:href="@{/konser/} + ${konser.idKonser}">Detail</a>
+        <td class="text-center" th:text="${iterationStatus.count}"></td>
+        <td class="text-center" th:text="${konser.namaKonser}"></td>
+        <td class="text-center" th:text="'Rp ' + ${konser.totalPendapatan}"></td>
+        <td class="d-flex justify-content-center">
+          <a class="btn btn-info" th:href="@{/konser/} + ${konser.idKonser}">Detail</a>
         </td>
       </tr>
       </tbody>

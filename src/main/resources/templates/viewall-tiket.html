@@ -16,6 +16,7 @@
     <br>
     <a th:href="@{/tiket/pesan}" class="btn btn-primary">+ Beli Tiket</a>
     <br>
+    <br>
     <div th:if="*{listTiket.size() != 0}">
         <table class="table">
             <thead>
@@ -29,13 +30,16 @@
             </thead>
             <tbody>
             <tr th:each="tiket, iterationStatus  : ${listTiket}">
-                <td th:text="${iterationStatus.count}"></td>
-                <td th:text="${tiket.noTiket}"></td>
-                <td th:text="${tiket.konser.namaKonser}"></td>
-                <td th:text="${tiket.tipe.namaTipe}"></td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/tiket/} + ${tiket.idTiket}">Detail</a>
-                    <a class="btn btn-danger" th:href="@{/tiket/hapus/} + ${tiket.idTiket}">Hapus</a>
+                <td class="text-center" th:text="${iterationStatus.count}"></td>
+                <td class="text-center" th:text="${tiket.noTiket}"></td>
+                <td class="text-center" th:text="${tiket.konser.namaKonser}"></td>
+                <td class="text-center" th:text="${#strings.toUpperCase(tiket.tipe.namaTipe)}"></td>
+                <td class="d-flex justify-content-center">
+                    <a class="btn btn-info mx-1" th:href="@{/tiket/} + ${tiket.idTiket}">Detail</a>
+                    <br>
+                    <form th:action="@{/tiket/hapus/} + ${tiket.idTiket}" method="POST">
+                        <button class="btn btn-danger mx-1" type="submit">Hapus</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

@@ -13,7 +13,7 @@
             <div class="justify-content-center">
                 <div class="d-flex justify-content-between">
                     <h2>Detail Konser</h2>
-                    <a class="btn btn-warning" th:href="@{/konser/ubah/} + ${konser.idKonser}">Ubah Konser</a>
+                    <a class="btn btn-warning d-flex justify-content-center align-items-center text-white" th:href="@{/konser/ubah/} + ${konser.idKonser}">Ubah Konser</a>
                 </div>
 
                 <br>
@@ -51,15 +51,14 @@
                             <td th:text="${#temporals.format(idolTampil.jamMulaiTampil, 'hh.mm a')}"></td>
                             <td th:text="${idolTampil.idol.namaIdol}"></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" th:href="@{/idol/} + ${idolTampil.idol.idIdol}">Detail</a>
+                                <a class="btn btn-sm btn-info" th:href="@{/idol/} + ${idolTampil.idol.idIdol}">Detail</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <br>
                 </div>
-                <br>
-                <a class="btn btn-primary" href="/konser/">Kembali</a>
+                <a class="btn btn-primary" th:href="@{/konser}">Kembali</a>
             </div>
         </div>
     </div>

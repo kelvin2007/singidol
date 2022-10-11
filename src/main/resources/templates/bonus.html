@@ -67,7 +67,7 @@
           <td th:text="${#temporals.format(idolTampil.jamMulaiTampil, 'hh.mm a')}"></td>
           <td th:text="${idolTampil.idol.namaIdol}"></td>
           <td>
-            <a class="btn btn-sm btn-primary" th:href="@{/idol/} + ${idolTampil.idol.idIdol}">Detail</a>
+            <a class="btn btn-sm btn-info" th:href="@{/idol/} + ${idolTampil.idol.idIdol}">Detail</a>
           </td>
         </tr>
         </tbody>
