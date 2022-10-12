@@ -172,10 +172,14 @@ public class KonserController {
             penampilan.setKonser(konser);
         }
 
-        konserService.updateKonser(konser);
+        try {
+            konserService.updateKonser(konser);
 
-        model.addAttribute("namaKonser", konser.getNamaKonser());
-        return "update-konser";
+            model.addAttribute("namaKonser", konser.getNamaKonser());
+            return "update-konser";
+        } catch(ConstraintViolationException e){
+            return "error/error-konser";
+        }
     }
 
     @GetMapping("/bonus")
